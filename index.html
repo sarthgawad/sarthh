@@ -36,7 +36,7 @@
             background: linear-gradient(135deg, #3B82F6 0%, #10B981 100%);
         }
         
-        .skill-card:hover {
+        .skill-card:hover, .product-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
         }
@@ -71,6 +71,32 @@
         .theme-toggle {
             transition: all 0.3s ease;
         }
+        
+        .payment-modal {
+            transition: all 0.3s ease;
+            opacity: 0;
+            pointer-events: none;
+        }
+        
+        .payment-modal.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+        
+        .cart-badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background-color: #EF4444;
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+        }
     </style>
 </head>
 <body class="bg-light text-dark dark:bg-dark dark:text-white">
@@ -86,6 +112,13 @@
                         <a href="#home" class="nav-link active text-primary px-3 py-2 text-sm font-medium dark:text-blue-400">Home</a>
                         <a href="#about" class="nav-link text-gray-600 hover:text-primary px-3 py-2 text-sm font-medium dark:text-gray-300 dark:hover:text-blue-400">About</a>
                         <a href="#skills" class="nav-link text-gray-600 hover:text-primary px-3 py-2 text-sm font-medium dark:text-gray-300 dark:hover:text-blue-400">Skills</a>
+                        <a href="#shop" class="nav-link text-gray-600 hover:text-primary px-3 py-2 text-sm font-medium dark:text-gray-300 dark:hover:text-blue-400">Shop</a>
+                        <div class="relative">
+                            <button id="cart-btn" class="text-gray-600 hover:text-primary px-3 py-2 text-sm font-medium dark:text-gray-300 dark:hover:text-blue-400">
+                                <i class="fas fa-shopping-cart"></i>
+                                <span id="cart-count" class="cart-badge hidden">0</span>
+                            </button>
+                        </div>
                         <button id="theme-toggle" class="theme-toggle text-gray-600 hover:text-primary px-3 py-2 text-sm font-medium dark:text-gray-300 dark:hover:text-blue-400">
                             <i class="fas fa-moon dark:hidden"></i>
                             <i class="fas fa-sun hidden dark:block"></i>
@@ -108,10 +141,17 @@
                 <a href="#home" class="block px-3 py-2 text-base font-medium text-primary dark:text-blue-400">Home</a>
                 <a href="#about" class="block px-3 py-2 text-base font-medium text-gray-600 hover:text-primary dark:text-gray-300 dark:hover:text-blue-400">About</a>
                 <a href="#skills" class="block px-3 py-2 text-base font-medium text-gray-600 hover:text-primary dark:text-gray-300 dark:hover:text-blue-400">Skills</a>
+                <a href="#shop" class="block px-3 py-2 text-base font-medium text-gray-600 hover:text-primary dark:text-gray-300 dark:hover:text-blue-400">Shop</a>
+                <div class="relative">
+                    <button id="mobile-cart-btn" class="block w-full text-left px-3 py-2 text-base font-medium text-gray-600 hover:text-primary dark:text-gray-300 dark:hover:text-blue-400">
+                        <i class="fas fa-shopping-cart mr-2"></i> Cart
+                        <span id="mobile-cart-count" class="cart-badge hidden">0</span>
+                    </button>
+                </div>
                 <button id="mobile-theme-toggle" class="block w-full text-left px-3 py-2 text-base font-medium text-gray-600 hover:text-primary dark:text-gray-300 dark:hover:text-blue-400">
-                    <i class="fas fa-moon dark:hidden"></i>
-                    <i class="fas fa-sun hidden dark:block"></i>
-                    <span class="ml-2">Toggle Theme</span>
+                    <i class="fas fa-moon dark:hidden mr-2"></i>
+                    <i class="fas fa-sun hidden dark:block mr-2"></i>
+                    <span>Toggle Theme</span>
                 </button>
             </div>
         </div>
@@ -297,6 +337,219 @@
         </div>
     </section>
 
+    <!-- Shop Section -->
+    <section id="shop" class="py-16 bg-white dark:bg-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-dark dark:text-white mb-4">PC Accessories Shop</h2>
+                <div class="w-20 h-1 bg-primary mx-auto"></div>
+                <p class="text-gray-600 dark:text-gray-300 mt-4">High-quality PC accessories for developers and gamers</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Product 1 -->
+                <div class="product-card bg-gray-50 dark:bg-gray-700 p-6 rounded-lg shadow-md transition duration-300">
+                    <div class="flex justify-center mb-4">
+                        <img src="https://m.media-amazon.com/images/I/71UwSHSZRnL._AC_UF1000,1000_QL80_.jpg" alt="Mechanical Keyboard" class="h-48 object-contain">
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2 dark:text-white">Mechanical Keyboard</h3>
+                    <p class="text-gray-600 dark:text-gray-300 mb-4">RGB backlit mechanical keyboard with blue switches</p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-lg font-bold text-primary">₹2,499</span>
+                        <button class="add-to-cart bg-primary text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition duration-300" data-id="1" data-name="Mechanical Keyboard" data-price="2499">
+                            Add to Cart
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Product 2 -->
+                <div class="product-card bg-gray-50 dark:bg-gray-700 p-6 rounded-lg shadow-md transition duration-300">
+                    <div class="flex justify-center mb-4">
+                        <img src="https://m.media-amazon.com/images/I/61mpMH5TzkL._AC_UF1000,1000_QL80_.jpg" alt="Gaming Mouse" class="h-48 object-contain">
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2 dark:text-white">Gaming Mouse</h3>
+                    <p class="text-gray-600 dark:text-gray-300 mb-4">High precision gaming mouse with customizable DPI</p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-lg font-bold text-primary">₹1,299</span>
+                        <button class="add-to-cart bg-primary text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition duration-300" data-id="2" data-name="Gaming Mouse" data-price="1299">
+                            Add to Cart
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Product 3 -->
+                <div class="product-card bg-gray-50 dark:bg-gray-700 p-6 rounded-lg shadow-md transition duration-300">
+                    <div class="flex justify-center mb-4">
+                        <img src="https://m.media-amazon.com/images/I/81QpkIctqPL._AC_UF1000,1000_QL80_.jpg" alt="Monitor" class="h-48 object-contain">
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2 dark:text-white">24" Full HD Monitor</h3>
+                    <p class="text-gray-600 dark:text-gray-300 mb-4">IPS panel with 75Hz refresh rate and HDMI ports</p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-lg font-bold text-primary">₹12,999</span>
+                        <button class="add-to-cart bg-primary text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition duration-300" data-id="3" data-name="24\" Full HD Monitor" data-price="12999">
+                            Add to Cart
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Product 4 -->
+                <div class="product-card bg-gray-50 dark:bg-gray-700 p-6 rounded-lg shadow-md transition duration-300">
+                    <div class="flex justify-center mb-4">
+                        <img src="https://m.media-amazon.com/images/I/61C9WQYQtVL._AC_UF1000,1000_QL80_.jpg" alt="Headphones" class="h-48 object-contain">
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2 dark:text-white">Wireless Headphones</h3>
+                    <p class="text-gray-600 dark:text-gray-300 mb-4">Noise cancelling with 30hrs battery life</p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-lg font-bold text-primary">₹3,499</span>
+                        <button class="add-to-cart bg-primary text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition duration-300" data-id="4" data-name="Wireless Headphones" data-price="3499">
+                            Add to Cart
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Product 5 -->
+                <div class="product-card bg-gray-50 dark:bg-gray-700 p-6 rounded-lg shadow-md transition duration-300">
+                    <div class="flex justify-center mb-4">
+                        <img src="https://m.media-amazon.com/images/I/71iNwni9TsL._AC_UF1000,1000_QL80_.jpg" alt="Webcam" class="h-48 object-contain">
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2 dark:text-white">HD Webcam</h3>
+                    <p class="text-gray-600 dark:text-gray-300 mb-4">1080p resolution with built-in microphone</p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-lg font-bold text-primary">₹2,199</span>
+                        <button class="add-to-cart bg-primary text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition duration-300" data-id="5" data-name="HD Webcam" data-price="2199">
+                            Add to Cart
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Product 6 -->
+                <div class="product-card bg-gray-50 dark:bg-gray-700 p-6 rounded-lg shadow-md transition duration-300">
+                    <div class="flex justify-center mb-4">
+                        <img src="https://m.media-amazon.com/images/I/61B04fL3YIL._AC_UF1000,1000_QL80_.jpg" alt="Mouse Pad" class="h-48 object-contain">
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2 dark:text-white">Large Gaming Mouse Pad</h3>
+                    <p class="text-gray-600 dark:text-gray-300 mb-4">Waterproof surface with non-slip rubber base</p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-lg font-bold text-primary">₹599</span>
+                        <button class="add-to-cart bg-primary text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition duration-300" data-id="6" data-name="Large Gaming Mouse Pad" data-price="599">
+                            Add to Cart
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cart Modal -->
+    <div id="cart-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 payment-modal">
+        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-xl w-full max-w-md max-h-[80vh] overflow-y-auto">
+            <div class="p-6">
+                <div class="flex justify-between items-center mb-6">
+                    <h3 class="text-2xl font-bold text-dark dark:text-white">Your Cart</h3>
+                    <button id="close-cart" class="text-gray-500 hover:text-gray-700 dark:text-gray-300 dark:hover:text-gray-100">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                
+                <div id="cart-items" class="mb-6">
+                    <!-- Cart items will be added here dynamically -->
+                    <p class="text-gray-500 dark:text-gray-400 text-center py-4">Your cart is empty</p>
+                </div>
+                
+                <div class="border-t border-gray-200 dark:border-gray-700 pt-4 mb-6">
+                    <div class="flex justify-between mb-2">
+                        <span class="text-gray-600 dark:text-gray-300">Subtotal:</span>
+                        <span id="cart-subtotal" class="font-semibold text-dark dark:text-white">₹0</span>
+                    </div>
+                    <div class="flex justify-between mb-2">
+                        <span class="text-gray-600 dark:text-gray-300">Tax (18%):</span>
+                        <span id="cart-tax" class="font-semibold text-dark dark:text-white">₹0</span>
+                    </div>
+                    <div class="flex justify-between text-lg font-bold">
+                        <span class="text-gray-700 dark:text-gray-200">Total:</span>
+                        <span id="cart-total" class="text-primary">₹0</span>
+                    </div>
+                </div>
+                
+                <button id="checkout-btn" class="w-full bg-primary text-white py-3 rounded-lg font-medium hover:bg-blue-700 transition duration-300">
+                    Proceed to Checkout
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Payment Modal -->
+    <div id="payment-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 payment-modal">
+        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-xl w-full max-w-md max-h-[80vh] overflow-y-auto">
+            <div class="p-6">
+                <div class="flex justify-between items-center mb-6">
+                    <h3 class="text-2xl font-bold text-dark dark:text-white">Payment Details</h3>
+                    <button id="close-payment" class="text-gray-500 hover:text-gray-700 dark:text-gray-300 dark:hover:text-gray-100">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                
+                <form id="payment-form">
+                    <div class="mb-4">
+                        <label for="card-name" class="block text-gray-700 dark:text-gray-300 mb-2">Name on Card</label>
+                        <input type="text" id="card-name" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary dark:bg-gray-700 dark:border-gray-600" required>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <label for="card-number" class="block text-gray-700 dark:text-gray-300 mb-2">Card Number</label>
+                        <input type="text" id="card-number" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary dark:bg-gray-700 dark:border-gray-600" placeholder="1234 5678 9012 3456" required>
+                    </div>
+                    
+                    <div class="grid grid-cols-2 gap-4 mb-4">
+                        <div>
+                            <label for="card-expiry" class="block text-gray-700 dark:text-gray-300 mb-2">Expiry Date</label>
+                            <input type="text" id="card-expiry" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary dark:bg-gray-700 dark:border-gray-600" placeholder="MM/YY" required>
+                        </div>
+                        <div>
+                            <label for="card-cvv" class="block text-gray-700 dark:text-gray-300 mb-2">CVV</label>
+                            <input type="text" id="card-cvv" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary dark:bg-gray-700 dark:border-gray-600" placeholder="123" required>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-6">
+                        <label for="card-address" class="block text-gray-700 dark:text-gray-300 mb-2">Billing Address</label>
+                        <textarea id="card-address" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary dark:bg-gray-700 dark:border-gray-600" rows="3" required></textarea>
+                    </div>
+                    
+                    <div class="border-t border-gray-200 dark:border-gray-700 pt-4 mb-6">
+                        <div class="flex justify-between text-lg font-bold">
+                            <span class="text-gray-700 dark:text-gray-200">Total:</span>
+                            <span id="payment-total" class="text-primary">₹0</span>
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="w-full bg-primary text-white py-3 rounded-lg font-medium hover:bg-blue-700 transition duration-300">
+                        Pay Now
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Order Confirmation Modal -->
+    <div id="confirmation-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 payment-modal">
+        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-xl w-full max-w-md">
+            <div class="p-6 text-center">
+                <div class="flex justify-center mb-4">
+                    <div class="bg-green-100 dark:bg-green-900 p-3 rounded-full">
+                        <i class="fas fa-check-circle text-green-600 dark:text-green-300 text-4xl"></i>
+                    </div>
+                </div>
+                <h3 class="text-2xl font-bold text-dark dark:text-white mb-2">Payment Successful!</h3>
+                <p class="text-gray-600 dark:text-gray-300 mb-6">Thank you for your purchase. Your order has been placed successfully.</p>
+                <p class="text-gray-600 dark:text-gray-300 mb-6">Order ID: <span id="order-id" class="font-semibold">#ORD-123456</span></p>
+                <button id="close-confirmation" class="bg-primary text-white px-6 py-2 rounded-lg font-medium hover:bg-blue-700 transition duration-300">
+                    Continue Shopping
+                </button>
+            </div>
+        </div>
+    </div>
+
     <!-- Footer -->
     <footer class="bg-dark text-white py-8 dark:bg-gray-800">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -412,6 +665,200 @@
                 }
             });
         });
+
+        // Shopping Cart Functionality
+        let cart = [];
+        
+        // DOM Elements
+        const cartBtn = document.getElementById('cart-btn');
+        const mobileCartBtn = document.getElementById('mobile-cart-btn');
+        const cartModal = document.getElementById('cart-modal');
+        const closeCart = document.getElementById('close-cart');
+        const cartItems = document.getElementById('cart-items');
+        const cartSubtotal = document.getElementById('cart-subtotal');
+        const cartTax = document.getElementById('cart-tax');
+        const cartTotal = document.getElementById('cart-total');
+        const checkoutBtn = document.getElementById('checkout-btn');
+        const paymentModal = document.getElementById('payment-modal');
+        const closePayment = document.getElementById('close-payment');
+        const paymentForm = document.getElementById('payment-form');
+        const paymentTotal = document.getElementById('payment-total');
+        const confirmationModal = document.getElementById('confirmation-modal');
+        const closeConfirmation = document.getElementById('close-confirmation');
+        const orderId = document.getElementById('order-id');
+        const cartCount = document.getElementById('cart-count');
+        const mobileCartCount = document.getElementById('mobile-cart-count');
+        const addToCartButtons = document.querySelectorAll('.add-to-cart');
+        
+        // Generate random order ID
+        function generateOrderId() {
+            return '#ORD-' + Math.floor(100000 + Math.random() * 900000);
+        }
+        
+        // Update cart count
+        function updateCartCount() {
+            const count = cart.reduce((total, item) => total + item.quantity, 0);
+            cartCount.textContent = count;
+            mobileCartCount.textContent = count;
+            
+            if (count > 0) {
+                cartCount.classList.remove('hidden');
+                mobileCartCount.classList.remove('hidden');
+            } else {
+                cartCount.classList.add('hidden');
+                mobileCartCount.classList.add('hidden');
+            }
+        }
+        
+        // Update cart display
+        function updateCartDisplay() {
+            if (cart.length === 0) {
+                cartItems.innerHTML = '<p class="text-gray-500 dark:text-gray-400 text-center py-4">Your cart is empty</p>';
+                cartSubtotal.textContent = '₹0';
+                cartTax.textContent = '₹0';
+                cartTotal.textContent = '₹0';
+                paymentTotal.textContent = '₹0';
+                return;
+            }
+            
+            let itemsHTML = '';
+            let subtotal = 0;
+            
+            cart.forEach(item => {
+                subtotal += item.price * item.quantity;
+                itemsHTML += `
+                    <div class="flex justify-between items-center mb-4 pb-4 border-b border-gray-200 dark:border-gray-700">
+                        <div>
+                            <h4 class="font-medium text-dark dark:text-white">${item.name}</h4>
+                            <p class="text-gray-500 dark:text-gray-400 text-sm">₹${item.price} x ${item.quantity}</p>
+                        </div>
+                        <div class="flex items-center">
+                            <span class="font-medium text-dark dark:text-white mr-4">₹${item.price * item.quantity}</span>
+                            <button class="remove-item text-red-500 hover:text-red-700 dark:hover:text-red-400" data-id="${item.id}">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            const tax = subtotal * 0.18;
+            const total = subtotal + tax;
+            
+            cartItems.innerHTML = itemsHTML;
+            cartSubtotal.textContent = `₹${subtotal.toFixed(2)}`;
+            cartTax.textContent = `₹${tax.toFixed(2)}`;
+            cartTotal.textContent = `₹${total.toFixed(2)}`;
+            paymentTotal.textContent = `₹${total.toFixed(2)}`;
+            
+            // Add event listeners to remove buttons
+            document.querySelectorAll('.remove-item').forEach(button => {
+                button.addEventListener('click', function() {
+                    const id = this.getAttribute('data-id');
+                    removeFromCart(id);
+                });
+            });
+        }
+        
+        // Add to cart
+        function addToCart(id, name, price) {
+            const existingItem = cart.find(item => item.id === id);
+            
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({
+                    id,
+                    name,
+                    price: parseFloat(price),
+                    quantity: 1
+                });
+            }
+            
+            updateCartCount();
+            updateCartDisplay();
+            
+            // Show a quick notification
+            const notification = document.createElement('div');
+            notification.className = 'fixed bottom-4 right-4 bg-green-500 text-white px-4 py-2 rounded-lg shadow-lg';
+            notification.innerHTML = `<i class="fas fa-check-circle mr-2"></i> ${name} added to cart`;
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.classList.add('opacity-0', 'transition-opacity', 'duration-300');
+                setTimeout(() => notification.remove(), 300);
+            }, 2000);
+        }
+        
+        // Remove from cart
+        function removeFromCart(id) {
+            cart = cart.filter(item => item.id !== id);
+            updateCartCount();
+            updateCartDisplay();
+        }
+        
+        // Event Listeners
+        cartBtn.addEventListener('click', () => {
+            cartModal.classList.add('active');
+        });
+        
+        mobileCartBtn.addEventListener('click', () => {
+            cartModal.classList.add('active');
+            mobileMenu.classList.add('hidden');
+        });
+        
+        closeCart.addEventListener('click', () => {
+            cartModal.classList.remove('active');
+        });
+        
+        checkoutBtn.addEventListener('click', () => {
+            cartModal.classList.remove('active');
+            paymentModal.classList.add('active');
+        });
+        
+        closePayment.addEventListener('click', () => {
+            paymentModal.classList.remove('active');
+        });
+        
+        paymentForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            paymentModal.classList.remove('active');
+            orderId.textContent = generateOrderId();
+            confirmationModal.classList.add('active');
+            
+            // Clear cart after successful payment
+            cart = [];
+            updateCartCount();
+            updateCartDisplay();
+        });
+        
+        closeConfirmation.addEventListener('click', () => {
+            confirmationModal.classList.remove('active');
+            window.location.href = '#shop';
+        });
+        
+        // Close modals when clicking outside
+        [cartModal, paymentModal, confirmationModal].forEach(modal => {
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    modal.classList.remove('active');
+                }
+            });
+        });
+        
+        // Add to cart buttons
+        addToCartButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const id = this.getAttribute('data-id');
+                const name = this.getAttribute('data-name');
+                const price = this.getAttribute('data-price');
+                addToCart(id, name, price);
+            });
+        });
+        
+        // Initialize cart display
+        updateCartCount();
+        updateCartDisplay();
     </script>
 </body>
 </html>
